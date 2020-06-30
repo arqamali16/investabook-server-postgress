@@ -19,6 +19,7 @@ Libraries/Technologies used are listed below.
 - Nodemon 2.0.3
 - Express 4.17.1
 - Typescript 3.9.5
+- Loopback 4
 - Mongo DB 3.5.6
 
 ## Demo
