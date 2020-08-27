@@ -7,7 +7,10 @@ import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 
+
 import usersRoutes from "./routes/users-routes";
+import authRoutes from './routes/auth'
+
 
 const app = express();
 const port = 5000;
@@ -17,6 +20,7 @@ const url =
 app.use(bodyParser.json());
 
 app.use("/api/users", usersRoutes);
+app.use("/api/auth",authRoutes)
 
 app.use((error: any, req: any, res: any, next: any) => {
   if (error.headerSent) {
