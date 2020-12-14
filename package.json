@@ -1,37 +1,23 @@
 {
-	"name": "rent_reminder_app",
+	"name": "postgress-node",
 	"version": "1.0.0",
 	"description": "",
-	"main": "dist/app.js",
+	"main": "index.js",
 	"scripts": {
-		"prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
-		"build": "tsc",
-		"prestart": "npm run build",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "nodemon app.ts"
+		"start": "nodemon app.js",
+		"configure": "./bin/configuredb.sh"
 	},
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"@types/jsonwebtoken": "^8.5.0",
-		"bcrypt": "^5.0.0",
+		"bcryptjs": "^2.4.3",
+		"body-parser": "^1.19.0",
 		"express": "^4.17.1",
-		"express-validator": "^6.4.0",
 		"jsonwebtoken": "^8.5.1",
-		"lodash": "^4.17.15",
-		"mongodb": "^3.5.6",
-		"mongoose": "^5.9.18",
-		"uuid": "^7.0.3",
-		"way2sms": "^1.0.2"
+		"pg": "^8.5.1"
 	},
 	"devDependencies": {
-		"@types/bcrypt": "^3.0.0",
-		"@types/lodash": "^4.14.155",
-		"@types/express": "^4.17.6",
-		"@types/mongoose": "^5.7.27",
-		"@types/node": "^14.0.13",
-		"nodemon": "^2.0.3",
-		"tslint": "^6.1.2",
-		"typescript": "^3.9.5"
+		"nodemon": "^2.0.6"
 	}
 }
