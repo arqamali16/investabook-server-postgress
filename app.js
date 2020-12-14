@@ -16,6 +16,10 @@ app.use('/admin',loginRouter)
 
 app.use('/payment',paymentsRouter)
 
+app.use('/',(req,res)=>{
+    res.send('<h1>Connected to Investabook-Server</h1>')
+})
+
 app.use((req,res)=>{
     res.status(400).send('<h1>Page not found</h1>')
 })
