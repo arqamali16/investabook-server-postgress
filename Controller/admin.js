@@ -21,8 +21,17 @@ const getAdminDetails = (req,res) =>{
     res.status(200).send({ auth: true, token });
 }
 
+const getUser = (req,res) =>{
+    const {id}  = req.params
+pool.query('SELECT * FROM users WHERE id=$1',[id],(err,dbRes)=>{
+    if(err) console.log('error',err)
+    res.send(dbRes.rows)
+})
+}
+
 module.exports = {
     addAdmin,
     getAdminDetails,
-    getAllUsers
+    getAllUsers,
+    getUser
 }
