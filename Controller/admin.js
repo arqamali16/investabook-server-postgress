@@ -33,9 +33,19 @@ const getUser = (req,res) =>{
     })
 }
 
+const updateUser = () =>{
+    const {id}  = req.params
+    const {name,email,password}  = req.body
+    pool.query('UPDATE users SET name=($1) email=($2) password=($3) WHERE id=($4)',[name,email,password,id],(err,dbRes)=>{
+        if(err) console.log('error',err)
+        res.send('Details updated succesfully!')
+    })
+}
+
 module.exports = {
     addAdmin,
     getAdminDetails,
     getAllUsers,
-    getUser
+    getUser,
+    updateUser
 }
