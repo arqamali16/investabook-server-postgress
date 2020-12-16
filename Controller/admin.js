@@ -10,7 +10,11 @@ pool.query('SELECT * FROM users',(err,dbRes)=>{
 }
 
 const addAdmin = (req,res) =>{
-    res.send('<h1>Added an Admin</h1>')
+    const {name,email,password}  = req.body
+    pool.query('INSERT INTO users(name,email,password) VALUES ($1,$2,$3)',[name,email,password],(err,dbRes)=>{
+        if(err) console.log('error',err)
+        res.send(dbRes.rows)
+    })
 }
 
 const getAdminDetails = (req,res) =>{
@@ -23,10 +27,10 @@ const getAdminDetails = (req,res) =>{
 
 const getUser = (req,res) =>{
     const {id}  = req.params
-pool.query('SELECT * FROM users WHERE id=$1',[id],(err,dbRes)=>{
-    if(err) console.log('error',err)
-    res.send(dbRes.rows)
-})
+    pool.query('SELECT * FROM users WHERE id=$1',[id],(err,dbRes)=>{
+        if(err) console.log('error',err)
+        res.send(dbRes.rows)
+    })
 }
 
 module.exports = {
