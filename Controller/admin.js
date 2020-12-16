@@ -11,7 +11,7 @@ pool.query('SELECT * FROM users',(err,dbRes)=>{
 
 const addAdmin = (req,res) =>{
     const {name,email,password}  = req.body
-    pool.query('INSERT INTO users(name,email,password) VALUES ($1,$2,$3)',[name,email,password],(err,dbRes)=>{
+    pool.query('INSERT INTO users(name,email,password) VALUES($1,$2,$3)',[name,email,password],(err,dbRes)=>{
         if(err) console.log('error',err)
         res.send(dbRes.rows)
     })
@@ -36,7 +36,7 @@ const getUser = (req,res) =>{
 const updateUser = () =>{
     const {id}  = req.params
     const {name,email,password}  = req.body
-    pool.query('UPDATE users SET name=($1), email=($2), password=($3) WHERE id=($4)',[name,email,password,id],(err,dbRes)=>{
+    pool.query('UPDATE users SET name=($1) WHERE id=($2)',[name,id],(err,dbRes)=>{
         if(err) console.log('error',err)
         res.send('Details updated succesfully!')
     })
