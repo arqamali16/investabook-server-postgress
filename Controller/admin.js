@@ -36,8 +36,8 @@ const getUser = (req,res) =>{
 const updateUser = () =>{
     const {id}  = req.params
     const {name,email,password}  = req.body
-    pool.query('UPDATE users SET name=($1) WHERE id=($2)',[name,id],(err,dbRes)=>{
-        if(err)res.status(404).send(err)
+    pool.query('UPDATE users SET name=($1), email=($2), password=($3) WHERE id=($4)',[name,email,password,id],(err,dbRes)=>{
+        if(err) res.send(err)
         res.send('Details updated succesfully!')
     })
 }
