@@ -20,4 +20,4 @@ const prodDataBaseConfig = {
 	},
 };
 
-export default new Pool(devDataBaseConfig);
+export default new Pool(prodDataBaseConfig);
