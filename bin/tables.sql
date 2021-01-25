@@ -11,7 +11,7 @@ CREATE TABLE properties (
     address character varying(50),
     owner_id INT,
    	FOREIGN KEY(owner_id) REFERENCES owners(owner_id)
-)
+);
 
 CREATE TABLE tenants (
 	tenant_id serial PRIMARY KEY,
@@ -19,7 +19,7 @@ CREATE TABLE tenants (
     email character varying(50),
     building_id INT,
    	FOREIGN KEY(building_id) REFERENCES properties(property_id)
-)
+);
 
 CREATE TABLE payments (
 	payment_id serial PRIMARY KEY,
@@ -30,4 +30,4 @@ CREATE TABLE payments (
 	tenant_id INT,
 	building_id INT,
 	FOREIGN KEY(tenant_id) REFERENCES tenants(tenant_id)
-)
+);
