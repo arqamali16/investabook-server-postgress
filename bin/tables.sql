@@ -28,6 +28,5 @@ CREATE TABLE payments (
     amount NUMERIC,
 	approved boolean,
 	tenant_id INT,
-	building_id INT,
 	FOREIGN KEY(tenant_id) REFERENCES tenants(tenant_id)
 );
