@@ -5,14 +5,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
+const owners_1 = __importDefault(require("./Routes/owners"));
+const properties_1 = __importDefault(require("./Routes/properties"));
+const payments_1 = __importDefault(require("./Routes/payments"));
+const tenants_1 = __importDefault(require("./Routes/tenants"));
 const port = process.env.PORT || 6000;
 const app = express_1.default();
 app.use(body_parser_1.default.urlencoded({ extended: false }));
 app.use(body_parser_1.default.json());
-// const loginRouter  = require('./routes/log-routes')
-// const paymentsRouter = require('./routes/payments')
-// app.use('/admin',loginRouter)
-// app.use('/payment',paymentsRouter)
+app.use('/owner', owners_1.default);
+app.use('/payment', payments_1.default);
+app.use('/tenant', tenants_1.default);
+app.use('/property', properties_1.default);
 app.use('/', (req, res) => {
     res.send('<h1>Connected to Investabook-Server</h1>');
 });
