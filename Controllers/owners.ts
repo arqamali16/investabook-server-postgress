@@ -1,4 +1,6 @@
 import pool from '../db';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 const getAllOwners = (req: any, res: any) => {
 	pool.query('SELECT * FROM owners', (err: any, dbRes: any) => {
@@ -8,12 +10,18 @@ const getAllOwners = (req: any, res: any) => {
 	});
 };
 
-const addOwner = (req: any, res: any) => {
-	// const { name, email, password } = req.body;
-	// pool.query('INSERT INTO users(name,email,password) VALUES($1,$2,$3)', [name, email, password], (err, dbRes) => {
-	// 	if (err) console.log('error', err);
-	// 	res.send(dbRes.rows);
-	// });
+const addOwner = async (req: any, res: any) => {
+	const { name, email, password } = req.body;
+	// password hashing
+	const hashedPassword = await bcrypt.hash(password, 12);
+	pool.query(
+		'INSERT INTO owners(name,email,password) VALUES($1, $2,$3)',
+		[name, email, hashedPassword],
+		(err: any, dbRes: any) => {
+			if (err) console.log('owners error', err);
+			else res.send('owner added');
+		},
+	);
 };
 
 const getOwnersDetail = (req: any, res: any) => {

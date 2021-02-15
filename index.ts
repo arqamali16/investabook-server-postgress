@@ -5,6 +5,7 @@ import ownerRoutes from './Routes/owners';
 import propertyRoutes from './Routes/properties';
 import paymentRoutes from './Routes/payments';
 import tenantRoutes from './Routes/tenants';
+import authRoutes from './Routes/auth';
 
 const port = process.env.PORT || 6000;
 const app = Express();
@@ -16,6 +17,7 @@ app.use('/owner', ownerRoutes);
 app.use('/payment', paymentRoutes);
 app.use('/tenant', tenantRoutes);
 app.use('/property', propertyRoutes);
+app.use('/auth', authRoutes);
 
 app.use('/', (req, res) => {
 	res.send('<h1>Connected to Investabook-Server</h1>');
