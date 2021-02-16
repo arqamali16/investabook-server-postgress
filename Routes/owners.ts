@@ -1,11 +1,12 @@
 import express from 'express';
-import OnwerController from '../Controllers/owners';
+import OwnerController from '../Controllers/owners';
+import isAuth from '../Middleware/is-auth';
 
 const ownersRouter = express.Router();
 
-ownersRouter.get('/', OnwerController.getAllOwners);
-ownersRouter.post('/', OnwerController.addOwner);
-ownersRouter.put('/:id', OnwerController.updateOwner);
-ownersRouter.delete('/:id', OnwerController.deletOwner);
+ownersRouter.get('/', isAuth, OwnerController.getAllOwners);
+ownersRouter.post('/', isAuth, OwnerController.addOwner);
+ownersRouter.put('/:id', isAuth, OwnerController.updateOwner);
+ownersRouter.delete('/:id', isAuth, OwnerController.deletOwner);
 
 export default ownersRouter;
