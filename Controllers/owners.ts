@@ -1,36 +1,27 @@
 import pool from '../db';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import Owner from '../Models/owner';
 
 const getAllOwners = (req: any, res: any) => {
-	pool.query('SELECT * FROM owners', (err: any, dbRes: any) => {
-		if (err) console.log('owners error', err);
-		res.send(dbRes.rows);
-		console.log(dbRes.rows);
-	});
+	const owner = new Owner();
+	owner.getAll(res);
 };
 
 const addOwner = async (req: any, res: any) => {
 	const { name, email, password } = req.body;
-	// password hashing
-	const hashedPassword = await bcrypt.hash(password, 12);
-	pool.query(
-		'INSERT INTO owners(name,email,password) VALUES($1, $2,$3)',
-		[name, email, hashedPassword],
-		(err: any, dbRes: any) => {
-			if (err) console.log('owners error', err);
-			else res.send('owner added');
-		},
-	);
+	let hashPassword = bcrypt.hashSync(password, 12);
+	const owner = new Owner(name, email, hashPassword);
+	owner.add(res);
 };
 
-const getOwnersDetail = (req: any, res: any) => {
-	// const hashedPassword = bcrypt.hashSync(req.body.password, 8);
-	// const token = jwt.sign({ id: 1234 }, 'secret', {
-	// 	expiresIn: 86400, // expires in 24 hours
-	// });
-	// res.status(200).send({ auth: true, token });
+const getOwnersDetailById = (req: any, res: any) => {
+	const { id } = req.params;
+	const owner = new Owner();
+	owner.getOwnerById(id, res);
 };
+
+// const getOwnersDetailByEmail = (req: any, res: any) => {
+// };
 
 const updateOwner = (req: any, res: any) => {
 	// const { id } = req.params;
@@ -45,6 +36,10 @@ const updateOwner = (req: any, res: any) => {
 	// );
 };
 
-const deletOwner = () => {};
+const deletOwner = (req: any, res: any) => {
+	const { id } = req.params;
+	const owner = new Owner();
+	owner.delete(id, res);
+};
 
-export default { getAllOwners, addOwner, getOwnersDetail, updateOwner, deletOwner };
+export default { getAllOwners, addOwner, getOwnersDetailById, updateOwner, deletOwner };
