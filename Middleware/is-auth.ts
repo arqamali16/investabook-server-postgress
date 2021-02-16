@@ -1,6 +1,12 @@
 import jwt from 'jsonwebtoken';
 import { config } from '../config';
 
+/**
+ * Funtion handles authentication of the user
+ * @param req
+ * @param res
+ * @param next
+ */
 const isAuth = (req: any, res: any, next: any) => {
 	var token = req.headers['x-access-token'];
 	if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
