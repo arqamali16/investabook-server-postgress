@@ -1,19 +1,13 @@
-import pool from '../db';
-
+import Payment from '../Models/payment';
 const getAllPayments = (req: any, res: any) => {
-	pool.query('SELECT * FROM payments', (err: any, dbRes: any) => {
-		if (err) console.log('owners error', err);
-		res.send(dbRes.rows);
-		console.log(dbRes.rows);
-	});
+	const owner = new Payment();
+	owner.getAll(res);
 };
 
 const addPayment = (req: any, res: any) => {
-	// const { name, email, password } = req.body;
-	// pool.query('INSERT INTO users(name,email,password) VALUES($1,$2,$3)', [name, email, password], (err, dbRes) => {
-	// 	if (err) console.log('error', err);
-	// 	res.send(dbRes.rows);
-	// });
+	const { mode, paid_on, amount, approved, tenant_id } = req.body;
+	const owner = new Payment(mode, paid_on, amount, approved, tenant_id);
+	owner.add(res);
 };
 
 const getPaymentDetail = (req: any, res: any) => {

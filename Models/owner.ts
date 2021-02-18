@@ -1,5 +1,4 @@
 import pool from '../db';
-import bcrypt from 'bcrypt';
 
 class Owner {
 	name: string;
