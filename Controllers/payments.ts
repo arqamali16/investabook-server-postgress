@@ -6,8 +6,8 @@ const getAllPayments = (req: any, res: any) => {
 
 const addPayment = (req: any, res: any) => {
 	const { mode, paid_on, amount, approved, tenant_id } = req.body;
-	const owner = new Payment(mode, paid_on, amount, approved, tenant_id);
-	owner.add(res);
+	const payment = new Payment(mode, paid_on, amount, approved, tenant_id);
+	payment.add(res);
 };
 
 const getPaymentDetail = (req: any, res: any) => {
@@ -19,18 +19,16 @@ const getPaymentDetail = (req: any, res: any) => {
 };
 
 const updatePayment = (req: any, res: any) => {
-	// const { id } = req.params;
-	// const { name, email, password } = req.body;
-	// pool.query(
-	// 	'UPDATE users SET name=$1, email=$2, password=$3 WHERE id=$4',
-	// 	[name, email, password, id],
-	// 	(err, dbRes) => {
-	// 		if (err) res.send(err);
-	// 		res.send('Details updated succesfully!');
-	// 	},
-	// );
+	const { paymentId } = req.params;
+	const { mode, paid_on, amount, approved, tenant_id } = req.body;
+	const payment = new Payment(mode, paid_on, amount, approved, tenant_id);
+	payment.edit(paymentId, res);
 };
 
-const deletPayment = () => {};
+const deletPayment = (req: any, res: any) => {
+	const { id } = req.params;
+	const payment = new Payment();
+	payment.delete(id, res);
+};
 
 export default { getAllPayments, addPayment, getPaymentDetail, updatePayment, deletPayment };

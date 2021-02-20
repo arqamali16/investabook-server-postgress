@@ -26,12 +26,21 @@ class Payment {
 		);
 	};
 
-	edit = () => {};
+	edit = (paymentId: any, response: any) => {
+		pool.query(
+			'UPDATE payments SET mode = $1, paid_on = $2, amount = $3, approved= $4, tenant_id = $5 WHERE payment_id = $6',
+			[this.mode, this.paid_on, this.amount, this.approved, this.tenant_id, paymentId],
+			(err: any, dbRes: any) => {
+				if (err) response.send({ status: false, message: err });
+				else response.send({ status: true, message: 'Payment Edited!' });
+			},
+		);
+	};
 
 	delete = (id: any, response: any) => {
-		pool.query('DELETE FROM owners WHERE payment_is = $1', [id], (err: any, dbRes: any) => {
+		pool.query('DELETE FROM payments WHERE payment_id = $1', [id], (err: any, dbRes: any) => {
 			if (err) response.send({ status: false, message: err });
-			else response.send({ status: true, message: 'Owner deleted!' });
+			else response.send({ status: true, message: 'Payment deleted!' });
 		});
 	};
 
