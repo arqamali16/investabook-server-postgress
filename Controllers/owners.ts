@@ -1,4 +1,3 @@
-import pool from '../db';
 import bcrypt from 'bcrypt';
 import Owner from '../Models/owner';
 
@@ -19,9 +18,6 @@ const getOwnersDetailById = (req: any, res: any) => {
 	const owner = new Owner();
 	owner.getOwnerById(id, res);
 };
-
-// const getOwnersDetailByEmail = (req: any, res: any) => {
-// };
 
 const updateOwner = (req: any, res: any) => {
 	const { id } = req.params;
