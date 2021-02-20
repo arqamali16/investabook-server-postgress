@@ -23,14 +23,14 @@ class Property {
 	};
 
 	edit = (paymentId: any, response: any) => {
-		pool.query(
-			'UPDATE properties SET mode = $1, paid_on = $2, amount = $3, approved= $4, tenant_id = $5 WHERE payment_id = $6',
-			[this.mode, this.paid_on, this.amount, this.approved, this.tenant_id, paymentId],
-			(err: any, dbRes: any) => {
-				if (err) response.send({ status: false, message: err });
-				else response.send({ status: true, message: 'Payment Edited!' });
-			},
-		);
+		// pool.query(
+		// 	'UPDATE properties SET mode = $1, paid_on = $2, amount = $3, approved= $4, tenant_id = $5 WHERE payment_id = $6',
+		// 	[this.mode, this.paid_on, this.amount, this.approved, this.tenant_id, paymentId],
+		// 	(err: any, dbRes: any) => {
+		// 		if (err) response.send({ status: false, message: err });
+		// 		else response.send({ status: true, message: 'Payment Edited!' });
+		// 	},
+		// );
 	};
 
 	delete = (id: any, response: any) => {
