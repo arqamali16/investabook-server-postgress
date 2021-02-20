@@ -24,16 +24,10 @@ const getOwnersDetailById = (req: any, res: any) => {
 // };
 
 const updateOwner = (req: any, res: any) => {
-	// const { id } = req.params;
-	// const { name, email, password } = req.body;
-	// pool.query(
-	// 	'UPDATE users SET name=$1, email=$2, password=$3 WHERE id=$4',
-	// 	[name, email, password, id],
-	// 	(err, dbRes) => {
-	// 		if (err) res.send(err);
-	// 		res.send('Details updated succesfully!');
-	// 	},
-	// );
+	const { id } = req.params;
+	const { name, email } = req.body;
+	const owner = new Owner(name, email);
+	owner.edit(id, res);
 };
 
 const deletOwner = (req: any, res: any) => {

@@ -22,7 +22,16 @@ class Owner {
 		);
 	};
 
-	edit = () => {};
+	edit = (ownerId: any, response: any) => {
+		pool.query(
+			'UPDATE owners SET name = $1, email = $2 WHERE owner_id = $3',
+			[this.name, this.email, ownerId],
+			(err: any, dbRes: any) => {
+				if (err) response.send({ status: false, message: err });
+				else response.send({ status: true, message: 'Owner Edited!' });
+			},
+		);
+	};
 
 	delete = (id: any, response: any) => {
 		pool.query('DELETE FROM owners WHERE owner_id = $1', [id], (err: any, dbRes: any) => {
