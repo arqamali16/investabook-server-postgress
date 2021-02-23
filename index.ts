@@ -1,5 +1,6 @@
 import Express from 'express';
 import BodyParser from 'body-parser';
+import cors from 'cors';
 
 import ownerRoutes from './Routes/owners';
 import propertyRoutes from './Routes/properties';
@@ -10,6 +11,7 @@ import authRoutes from './Routes/auth';
 const port = process.env.PORT || 6000;
 const app = Express();
 
+app.use(cors());
 app.use(BodyParser.urlencoded({ extended: false }));
 app.use(BodyParser.json());
 
