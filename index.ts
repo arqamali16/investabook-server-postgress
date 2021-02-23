@@ -15,6 +15,11 @@ app.use(cors());
 app.use(BodyParser.urlencoded({ extended: false }));
 app.use(BodyParser.json());
 
+app.use((req, res, next) => {
+	res.header('Access-Control-Allow-Origin', '*');
+	next();
+});
+
 app.use('/owner', ownerRoutes);
 app.use('/payment', paymentRoutes);
 app.use('/tenant', tenantRoutes);
