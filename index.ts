@@ -8,13 +8,19 @@ import paymentRoutes from './Routes/payments';
 import tenantRoutes from './Routes/tenants';
 import authRoutes from './Routes/auth';
 
+const corsOpts = {
+	origin: '*',
+	methods: ['GET', 'POST', 'PUT', 'DELETE'],
+	allowedHeaders: ['Content-Type'],
+};
+
 const port = process.env.PORT || 6000;
 const app = Express();
 
+app.use(cors());
+
 app.use(BodyParser.urlencoded({ extended: false }));
 app.use(BodyParser.json());
-
-app.use(cors());
 
 app.use('/owner', ownerRoutes);
 app.use('/payment', paymentRoutes);
