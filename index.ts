@@ -17,7 +17,7 @@ const corsOpts = {
 const port = process.env.PORT || 6000;
 const app = Express();
 
-app.use(cors());
+app.use(cors(corsOpts));
 
 app.use(BodyParser.urlencoded({ extended: false }));
 app.use(BodyParser.json());
