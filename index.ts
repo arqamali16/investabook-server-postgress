@@ -22,27 +22,19 @@ const app = Express();
 app.use(BodyParser.urlencoded({ extended: false }));
 app.use(BodyParser.json());
 
-const setHeaders = (req: any, res: any, next: any) => {
+app.use((req: any, res: any, next: any) => {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
 	res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 	res.setHeader('x-access-token', '*');
 	next();
-};
+});
 
-const setHeadersAuth = (req: any, res: any, next: any) => {
-	res.setHeader('Access-Control-Allow-Origin', '*');
-	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-	res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-	res.setHeader('Access-Control-Allow-Credentials', 'true');
-	next();
-};
-
-app.use('/owner', setHeaders, ownerRoutes);
-app.use('/payment', setHeaders, paymentRoutes);
-app.use('/tenant', setHeaders, tenantRoutes);
-app.use('/property', setHeaders, propertyRoutes);
-app.use('/auth', setHeadersAuth, authRoutes);
+app.use('/owner', ownerRoutes);
+app.use('/payment', paymentRoutes);
+app.use('/tenant', tenantRoutes);
+app.use('/property', propertyRoutes);
+app.use('/auth', authRoutes);
 
 app.use('/', (req, res) => {
 	res.send('<h1>Connected to Investabook-Server</h1>');
