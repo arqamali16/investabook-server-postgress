@@ -15,7 +15,7 @@ const login = async (req: any, res: any) => {
 				var token = jwt.sign({ id: 'user id from db' }, config.secret, {
 					expiresIn: 3600, // expires in 24 hours
 				});
-				res.status(200).send({ auth: true, token: token });
+				res.status(200).send({ auth: true, token: token, userDetails: _.first(dbRes.rows) });
 			} else {
 				res.status(200).send({ status: false, message: 'password did not match' });
 			}
